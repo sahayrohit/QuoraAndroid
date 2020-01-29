@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="User">
+        <menu>
+            <item android:title="My Profile"
+                android:id="@+id/nav_my_profile" />
+            <item android:title="category"
+                android:id="@+id/nav_my_cart" />
+            <item android:title="Login"
+                android:id="@+id/nav_login" />
+
+
+        </menu>
+    </item>
+
+</menu>
