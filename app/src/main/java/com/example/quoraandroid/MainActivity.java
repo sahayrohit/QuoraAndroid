@@ -5,6 +5,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,8 +16,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import com.example.quoraandroid.adapter.PostAdapter;
+
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -48,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           actionBarDrawerToggle.syncState();
           navigationView.setNavigationItemSelectedListener(this);
 
+        RecyclerView recyclerView = findViewById(R.id.top_question_recycler);
 
         FirebaseMessaging.getInstance().subscribeToTopic("weather")
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -65,12 +72,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // [END subscribe_topics]
     }
 
+        PostAdapter postAdapter = new PostAdapter();
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.VERTICAL,false));
+        recyclerView.setAdapter(postAdapter);
+
 
 
     private void sendToLogin() {
         Intent login_intent = new Intent(MainActivity.this,LoginActivity.class);
         startActivity(login_intent);
         finish();
+    }
+    private void sendToMyProfile() {
+        Intent profile_intent = new Intent(MainActivity.this,MyProfileActivity.class);
+        startActivity(profile_intent);
     }
 
     @Override
@@ -79,11 +94,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_login:
                 sendToLogin();
                 break;
+            case R.id.nav_my_profile:
+                sendToMyProfile();
             default:
                 return true;
         }
         return false;
     }
+
+
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
