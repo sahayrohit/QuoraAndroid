@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:layout_marginBottom="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:id="@+id/post_question_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:maxLength="200"
+            android:maxLines="8"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:padding="8dp"
+            android:text="What is the most disrespectful thing someone has done while you were shopping?"
+            android:textColor="@color/colorBlack" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/avatar" />
+        <LinearLayout
+            android:layout_marginStart="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/post_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gaurav Chandak"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/post_user_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SDE II Flipkart"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/post_answer_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:maxLines="6"
+            android:padding="8dp"
+            android:textSize="16sp"
+            android:text="For fields like Embedded Systems Programming, Machine Learning, Robotics, Information Security I will suggest Python. Google, Youtube, Instagram amongst others are built on python (Django Framework). Java too works in these fields, but python’s readability, associated with the ease in debugging code written in it (python), added to the relative ease associated in learning it makes it king. Am a self taught python and C++ programmer (more specified in Network Programming and Competitive Programming (Data Structures and Algorithms)). I personally am learning Java now only because its a kind o"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:backgroundTint="@color/colorBlack"
+        />
+
+
+
+</LinearLayout>
