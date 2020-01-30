@@ -5,6 +5,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.quoraandroid.adapter.PostAdapter;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,7 +46,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           actionBarDrawerToggle.syncState();
           navigationView.setNavigationItemSelectedListener(this);
 
+        RecyclerView recyclerView = findViewById(R.id.top_question_recycler);
 
+        PostAdapter postAdapter = new PostAdapter();
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.VERTICAL,false));
+        recyclerView.setAdapter(postAdapter);
 
 
     }
@@ -53,6 +60,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(login_intent);
         finish();
     }
+    private void sendToMyProfile() {
+        Intent profile_intent = new Intent(MainActivity.this,MyProfileActivity.class);
+        startActivity(profile_intent);
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -60,11 +71,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_login:
                 sendToLogin();
                 break;
+            case R.id.nav_my_profile:
+                sendToMyProfile();
             default:
                 return true;
         }
         return false;
     }
+
+
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {

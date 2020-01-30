@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
+    android:background="@color/defaultColor"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
@@ -13,37 +14,58 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.google.android.material.appbar.AppBarLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/main_toolbar"
-            android:backgroundTint="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <LinearLayout
-            android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/search_btn"
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/main_toolbar"
+                android:backgroundTint="@android:color/white"
+                android:layout_width="match_parent"
+                app:titleTextColor="@color/colorWhite"
+                app:title="Quora"
+                android:layout_height="wrap_content"
+                android:theme="@style/ToolbarTheme" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/search_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="Search"
+                    android:textColor="@android:color/black"
+                    android:textAllCaps="false"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:backgroundTint="@color/colorWhite"
+                    android:drawableLeft="@drawable/search"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="Search"
-            android:textColor="@android:color/black"
-            android:textAllCaps="false"
-            android:layout_marginStart="8dp"
-            android:background="@color/colorPrimaryDark"
-            android:backgroundTint="@color/colorWhite"
-            android:drawableLeft="@drawable/search"
-            android:textSize="16sp"
-            />
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/top_question_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"/>
         </LinearLayout>
 
-    </com.google.android.material.appbar.AppBarLayout>
+
+    </LinearLayout>
+
 
 
 
