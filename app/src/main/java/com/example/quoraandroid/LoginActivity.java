@@ -27,11 +27,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mEmail = (TextInputEditText) findViewById(R.id.login_email);
-        mPassword = (TextInputEditText) findViewById(R.id.login_password);
-        mRegButton = (TextView) findViewById(R.id.reg_txt_btn);
-        mGuestBtn = (Button) findViewById(R.id.login_guest_btn);
-        mLoginBtn = (Button) findViewById(R.id.login_login_btn);
+        mEmail = findViewById(R.id.login_email);
+        mPassword = findViewById(R.id.login_password);
+        mRegButton = findViewById(R.id.reg_txt_btn);
+        mGuestBtn = findViewById(R.id.login_guest_btn);
+        mLoginBtn = findViewById(R.id.login_login_btn);
 
 
        //onClickListeners
