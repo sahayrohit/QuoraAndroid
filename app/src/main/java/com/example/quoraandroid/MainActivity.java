@@ -51,6 +51,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           navigationView.setNavigationItemSelectedListener(this);
 
         RecyclerView recyclerView = findViewById(R.id.top_question_recycler);
+        PostAdapter postAdapter = new PostAdapter();
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.VERTICAL,false));
+        recyclerView.setAdapter(postAdapter);
+
 
         PostAdapter postAdapter = new PostAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.VERTICAL,false));
@@ -87,6 +91,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
+
+//        // [END subscribe_topics]
+
     }
 
 
@@ -101,6 +108,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent profile_intent = new Intent(MainActivity.this,MyProfileActivity.class);
         startActivity(profile_intent);
     }
+    private void sendToFriendRequest() {
+        Intent friend_request_intent = new Intent(MainActivity.this,FriendRequestActivity.class);
+        startActivity(friend_request_intent);
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -110,11 +121,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_my_profile:
                 sendToMyProfile();
+                break;
+            case R.id.nav_follow:
+                sendToFriendRequest();
+                break;
             default:
                 return true;
         }
         return false;
     }
+
 
 
 
