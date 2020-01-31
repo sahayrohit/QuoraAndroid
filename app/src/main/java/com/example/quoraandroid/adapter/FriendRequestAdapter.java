@@ -9,31 +9,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quoraandroid.R;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
-
-
-
+public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem = layoutInflater.inflate(R.layout.postlayout,parent,false);
-        return new PostAdapter.ViewHolder(listItem);
-
+        View listItem = layoutInflater.inflate(R.layout.friend_request_layout,parent,false);
+        return new FriendRequestAdapter.ViewHolder(listItem);
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.itemView.getRootView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
     }
-
-
 
     @Override
     public int getItemCount() {
@@ -44,9 +33,5 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
         }
-    }
-
-    public interface PostClick{
-       void onClickSend();
     }
 }
