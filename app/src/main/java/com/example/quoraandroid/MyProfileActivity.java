@@ -13,6 +13,9 @@ import com.example.quoraandroid.adapter.QuestionAdapter;
 public class MyProfileActivity extends AppCompatActivity {
     private androidx.appcompat.widget.Toolbar toolbar;
 
+    private RecyclerView recyclerView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,10 +28,10 @@ public class MyProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         //RecyclerView for category
-        RecyclerView recyclerView_cat = findViewById(R.id.profile_category_recycler);
+        recyclerView = findViewById(R.id.profile_category_recycler);
         CategoryAdapter categoryAdapter = new CategoryAdapter();
-        recyclerView_cat.setLayoutManager(new LinearLayoutManager(MyProfileActivity.this,LinearLayoutManager.HORIZONTAL,false));
-        recyclerView_cat.setAdapter(categoryAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(MyProfileActivity.this,LinearLayoutManager.HORIZONTAL,false));
+        recyclerView.setAdapter(categoryAdapter);
 
         //RecyclerView for questions
         RecyclerView recyclerView_que = findViewById(R.id.profile_question_recycler);
