@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
     private void sendToRegister() {
         Intent reg_intent = new Intent(LoginActivity.this,RegisterActivity.class);
         startActivity(reg_intent);
+        finish();
     }
     private void sendToMain(){
         Intent main_intent = new Intent(LoginActivity.this,MainActivity.class);

@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UserPrefActivity"></activity>
+        <activity android:name=".FriendRequestActivity"></activity>
+        <activity android:name=".AnswerActivity" />
+        <activity android:name=".UserPrefActivity" />
         <activity android:name=".NotificationActivity" />
         <activity
             android:name=".MyProfileActivity"
@@ -23,6 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".MyFirebaseMessagingService"
             android:exported="false">

@@ -31,7 +31,26 @@
                 app:titleTextColor="@color/colorWhite"
                 app:title="Quora"
                 android:layout_height="wrap_content"
-                android:theme="@style/ToolbarTheme" />
+                android:theme="@style/ToolbarTheme" >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="end">
+                    <ImageView
+                        android:layout_marginEnd="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/notification"
+                        />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/add" />
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
