@@ -1,6 +1,8 @@
 package com.example.quoraandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,8 +10,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import com.example.quoraandroid.adapter.FriendRequestAdapter;
+import com.example.quoraandroid.adapter.UserProfileOptionsAdapter;
 import com.example.quoraandroid.pojo.registration.Interest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserPrefActivity extends AppCompatActivity {
@@ -36,6 +41,11 @@ public class UserPrefActivity extends AppCompatActivity {
         web=(CheckBox)findViewById(R.id.cb_web);
         booze=(CheckBox)findViewById(R.id.cb_booze);
         food=(CheckBox)findViewById(R.id.cb_food);
+
+
+
+
+
 
 
         register.setOnClickListener(new View.OnClickListener() {
