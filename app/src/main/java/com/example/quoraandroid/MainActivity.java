@@ -56,9 +56,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         recyclerView.setAdapter(postAdapter);
 
 
-        PostAdapter postAdapter = new PostAdapter();
-        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.VERTICAL,false));
-        recyclerView.setAdapter(postAdapter);
 
 //        FirebaseMessaging.getInstance().subscribeToTopic("weather")
 //                .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -112,6 +109,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent friend_request_intent = new Intent(MainActivity.this,FriendRequestActivity.class);
         startActivity(friend_request_intent);
     }
+    private void sendToUserProfile() {
+        Intent user_profile_intent = new Intent(MainActivity.this,UserProfile.class);
+        startActivity(user_profile_intent);
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -124,6 +125,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_follow:
                 sendToFriendRequest();
+                break;
+            case R.id.nav_cat:
+                sendToUserProfile();
                 break;
             default:
                 return true;

@@ -5,11 +5,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quoraandroid.R;
 
+import java.util.ArrayList;
+
 public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
+
+
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
