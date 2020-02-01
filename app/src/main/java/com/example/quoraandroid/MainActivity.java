@@ -15,23 +15,91 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quoraandroid.adapter.PostAdapter;
+import com.example.quoraandroid.pojo.questionAndAnswer.responseHomePage.ContentItem;
+import com.example.quoraandroid.pojo.questionAndAnswer.responseHomePage.ResponseQuestion;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener ,PostAdapter.PostClick{
 
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    LinearLayoutManager layoutManager;
+    PostAdapter postAdapter;
+    int position;
+    RecyclerView recyclerView;
+
+    List<ContentItem> list=new ArrayList<>();
+
+    int page=0;
+    int totalPages;
+    int totalElements;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
+
+
+
+
+
+        App.getRetrofit().create(RetroAPI.class).homepage(page,3).enqueue(new Callback<ResponseQuestion>() {
+            @Override
+            public void onResponse(Call<ResponseQuestion> call, Response<ResponseQuestion> response) {
+
+                ResponseQuestion responseQuestion=response.body();
+                list=responseQuestion.getContent();
+                Toast.makeText(MainActivity.this,list.get(0).getQuestionValue(),Toast.LENGTH_LONG).show();
+                layoutManager=new LinearLayoutManager(MainActivity.this);
+                recyclerView = findViewById(R.id.top_question_recycler);
+                recyclerView.setLayoutManager(layoutManager);
+                postAdapter = new PostAdapter(list,MainActivity.this);
+                recyclerView.setAdapter(postAdapter);
+                totalPages=response.body().getTotalPages();
+
+
+
+                recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+                        position =layoutManager.findLastCompletelyVisibleItemPosition();
+                        if ((position == list.size()-1)&&(page!=totalPages)){
+                            // End has been reached
+                            page++;
+                            apiCall(page,3);
+                            Log.i("Yaeye!", "end called");
+                        }
+                    }
+                });
+                apiCall(page,3);
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseQuestion> call, Throwable t) {
+
+                Log.d("Fail","failure");
+            }
+        });
 
 
         toolbar = (Toolbar) findViewById(R.id.main_toolbar);
@@ -50,10 +118,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           actionBarDrawerToggle.syncState();
           navigationView.setNavigationItemSelectedListener(this);
 
-        RecyclerView recyclerView = findViewById(R.id.top_question_recycler);
-        PostAdapter postAdapter = new PostAdapter();
-        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.VERTICAL,false));
-        recyclerView.setAdapter(postAdapter);
+
 
 
 
@@ -92,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        // [END subscribe_topics]
 
     }
+
 
 
 
@@ -140,6 +206,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+
+    @Override
+    public void onClickSend() {
+
+        Intent intent=new Intent(MainActivity.this, AnswerActivity.class);
+        startActivity(intent);
+
+    }
+    public void apiCall(int page, int size){
+
+        App.getRetrofit().create(RetroAPI.class).homepage(page,size).enqueue(new Callback<ResponseQuestion>() {
+            @Override
+            public void onResponse(Call<ResponseQuestion> call, Response<ResponseQuestion> response) {
+
+                int length=list.size();
+                list.addAll(response.body().getContent());
+                totalPages=response.body().getTotalPages();
+                totalElements=response.body().getTotalElements();
+                postAdapter=new PostAdapter(list,MainActivity.this);
+                recyclerView.setAdapter(postAdapter);
+                postAdapter.notifyItemRangeInserted(length,response.body().getContent().size());
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseQuestion> call, Throwable t) {
+
+            }
+        });
+
 
     }
 }
