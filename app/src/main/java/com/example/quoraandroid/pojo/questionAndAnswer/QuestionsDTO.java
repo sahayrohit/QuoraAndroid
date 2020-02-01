@@ -1,6 +1,7 @@
 package com.example.quoraandroid.pojo.questionAndAnswer;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import lombok.Getter;
@@ -10,10 +11,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class QuestionsDTO {
-
     private String questionId;
     private String questionValue;
-    private boolean questionStatus;
+    private Boolean questionStatus;
+    private Date date=new Date();
     private String askerProfileId;
     private String askerProfileName;
     private String profileWhereAskedId;
@@ -25,7 +26,8 @@ public class QuestionsDTO {
     private List<String> dislikeProfileIdList=new ArrayList<>();
     private List<String> emojisValue=new ArrayList<>();
     private List<String> emojisProfileIdList=new ArrayList<>();
-    private boolean isThreadOpen;
+    private Boolean isThreadOpen;
     private List<String> answerIdList=new ArrayList<>();
     private String approvedAnswerId;
+    private String approvedAnswer;
 }

@@ -16,8 +16,6 @@ public class Data{
 	@SerializedName("role")
 	private String role;
 
-	@SerializedName("interest")
-	private List<InterestItem> interest;
 
 	@SerializedName("name")
 	private String name;
@@ -52,13 +50,9 @@ public class Data{
 		return role;
 	}
 
-	public void setInterest(List<InterestItem> interest){
-		this.interest = interest;
-	}
 
-	public List<InterestItem> getInterest(){
-		return interest;
-	}
+
+
 
 	public void setName(String name){
 		this.name = name;
@@ -84,17 +78,5 @@ public class Data{
 		return userId;
 	}
 
-	@Override
- 	public String toString(){
-		return 
-			"Data{" + 
-			"emailAddress = '" + emailAddress + '\'' + 
-			",password = '" + password + '\'' + 
-			",role = '" + role + '\'' + 
-			",interest = '" + interest + '\'' + 
-			",name = '" + name + '\'' + 
-			",channel = '" + channel + '\'' + 
-			",userId = '" + userId + '\'' + 
-			"}";
-		}
+
 }

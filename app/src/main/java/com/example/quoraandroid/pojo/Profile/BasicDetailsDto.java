@@ -14,7 +14,5 @@ public class BasicDetailsDto {
     String name;
     String emailAddress;
     String password;
-    String channel;
-    String role;
-    List<InterestDto> category;
+
 }
