@@ -122,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-
 //        FirebaseMessaging.getInstance().subscribeToTopic("weather")
 //                .addOnCompleteListener(new OnCompleteListener<Void>() {
 //                    @Override
@@ -176,6 +175,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent friend_request_intent = new Intent(MainActivity.this,FriendRequestActivity.class);
         startActivity(friend_request_intent);
     }
+    private void sendToUserProfile() {
+        Intent user_profile_intent = new Intent(MainActivity.this,UserProfile.class);
+        startActivity(user_profile_intent);
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -188,6 +191,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_follow:
                 sendToFriendRequest();
+                break;
+            case R.id.nav_cat:
+                sendToUserProfile();
                 break;
             default:
                 return true;

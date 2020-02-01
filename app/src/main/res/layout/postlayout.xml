@@ -73,6 +73,7 @@
             android:layout_margin="8dp"
             android:maxLines="6"
             android:padding="8dp"
+            android:ellipsize="end"
             android:textSize="16sp"
             android:text="For fields like Embedded Systems Programming, Machine Learning, Robotics, Information Security I will suggest Python. Google, Youtube, Instagram amongst others are built on python (Django Framework). Java too works in these fields, but python’s readability, associated with the ease in debugging code written in it (python), added to the relative ease associated in learning it makes it king. Am a self taught python and C++ programmer (more specified in Network Programming and Competitive Programming (Data Structures and Algorithms)). I personally am learning Java now only because its a kind o"
             />
