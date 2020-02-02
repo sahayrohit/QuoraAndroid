@@ -20,6 +20,10 @@
         <activity android:name=".AdsActivity">
 
         </activity>
+        android:theme="@style/AppTheme">
+        <activity android:name=".CommentsActivity"></activity>
+        <activity android:name=".UserProfile" />
+
         <activity android:name=".FriendRequestActivity" />
         <activity android:name=".AnswerActivity" />
         <activity android:name=".UserPrefActivity" >

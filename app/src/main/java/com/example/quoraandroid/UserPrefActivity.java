@@ -1,6 +1,8 @@
 package com.example.quoraandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,9 +18,13 @@ import android.widget.Toast;
 import com.example.quoraandroid.pojo.Profile.ExtraDetailsDto;
 import com.example.quoraandroid.pojo.Profile.InterestDto;
 import com.example.quoraandroid.pojo.registration.ApiResponse;
+import com.example.quoraandroid.adapter.FriendRequestAdapter;
+import com.example.quoraandroid.adapter.UserProfileOptionsAdapter;
+
 import com.example.quoraandroid.pojo.registration.Interest;
 import com.example.quoraandroid.pojo.registration.SignUp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -60,6 +66,11 @@ public class UserPrefActivity extends AppCompatActivity {
         radioGroup=findViewById(R.id.rg_pref);
         publicButton=findViewById(R.id.rb_public);
         privateButton=findViewById(R.id.rb_private);
+
+
+
+
+
 
 
         register.setOnClickListener(new View.OnClickListener() {
