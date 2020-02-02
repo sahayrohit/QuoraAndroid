@@ -37,6 +37,23 @@ public class SearchActivity extends AppCompatActivity {
         searchTxt = findViewById(R.id.search_bar_txt);
         mSearch = findViewById(R.id.search_btn_1);
 
+
+//        App.getRetrofit().create(RetroAPI.class).getSearch("naman").enqueue(new Callback<SearchPaginatedResponse>() {
+//            @Override
+//            public void onResponse(Call<SearchPaginatedResponse> call, Response<SearchPaginatedResponse> response) {
+//                SearchPaginatedResponse searchPaginatedResponse=response.body();
+//                Toast.makeText(SearchActivity.this,searchPaginatedResponse.getContent().get(2).getQuestionValue().toString(),Toast.LENGTH_LONG).show();
+//
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<SearchPaginatedResponse> call, Throwable t) {
+//                Log.d("Fail","Failure");
+//
+//            }
+//
+//        });
         //ProgressBars
         final ProgressDialog progressBar = new ProgressDialog(this);
         progressBar.setCancelable(true);

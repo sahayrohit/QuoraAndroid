@@ -10,9 +10,12 @@ import android.widget.Toast;
 import com.example.quoraandroid.pojo.Profile.ExtraDetailsDto;
 import com.example.quoraandroid.pojo.Profile.InterestDto;
 import com.example.quoraandroid.pojo.questionAndAnswer.AnswerDTO;
+import com.example.quoraandroid.pojo.questionAndAnswer.DislikesDTO;
 import com.example.quoraandroid.pojo.questionAndAnswer.LikesDTO;
 import com.example.quoraandroid.pojo.questionAndAnswer.QuestionsDTO;
 import com.example.quoraandroid.pojo.questionAndAnswer.ResponseAnswerCategory;
+import com.example.quoraandroid.pojo.questionAndAnswer.getAllAnsOfQuestionId.AnsOfAQuesIdResponse;
+import com.example.quoraandroid.pojo.questionAndAnswer.getAllQuestionsOfSelectedCategories.GetAllQuestionsOdCatResponse;
 import com.example.quoraandroid.pojo.questionAndAnswer.responseHomePage.ResponseQuestion;
 import com.example.quoraandroid.pojo.registration.Interest;
 import com.example.quoraandroid.pojo.registration.UserRegistrationDTO;
@@ -33,27 +36,67 @@ public class TestActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences=getSharedPreferences("login",MODE_PRIVATE);
         QuestionsDTO questionsDTO=new QuestionsDTO();
 
-
-
         String token=sharedPreferences.getString("accessToken","");
 
 
-        LikesDTO likesDTO=new LikesDTO();
-        likesDTO.setQuestionOrAnswerId("5e3692510cd8774e97bbe748");
 
-
-
-        App.getRetrofit().create(RetroAPI.class).addLikes(token,likesDTO).enqueue(new Callback<String>() {
+        App.getRetrofit().create(RetroAPI.class).getAllAnswerOfQuestion("5e3692510cd8774e97bbe748").enqueue(new Callback<AnsOfAQuesIdResponse>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<AnsOfAQuesIdResponse> call, Response<AnsOfAQuesIdResponse> response) {
+
+                AnsOfAQuesIdResponse ansOfAQuesIdResponse=response.body();
+                Toast.makeText(TestActivity.this,ansOfAQuesIdResponse.getContent().get(0).getAnswerValue(),Toast.LENGTH_LONG);
 
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<AnsOfAQuesIdResponse> call, Throwable t) {
 
             }
         });
+
+        //dislike Dto(working)
+
+//        DislikesDTO dislikesDTO=new DislikesDTO();
+//        dislikesDTO.setQuestionOrAnswerId("5e3692510cd8774e97bbe748");
+//
+//        App.getRetrofit().create(RetroAPI.class).addDislikes(token,dislikesDTO).enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+//
+//            }
+//        });
+
+
+
+
+
+
+
+
+
+//  likes to questions and answers(Working)
+//        LikesDTO likesDTO=new LikesDTO();
+//        likesDTO.setQuestionOrAnswerId("5e3692510cd8774e97bbe748");
+//
+//
+//
+//        App.getRetrofit().create(RetroAPI.class).addLikes(token,likesDTO).enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+//
+//            }
+//        });
 
 
         //Add a answer (Working)
@@ -140,28 +183,26 @@ public class TestActivity extends AppCompatActivity {
 //        });
 
 
-        //not working
-//        List<String> list=new ArrayList<>();
-//        list.add("coding");
+        List<String> list=new ArrayList<>();
+        list.add("coding");
+        ResponseAnswerCategory responseAnswerCategory=new ResponseAnswerCategory();
+        responseAnswerCategory.setCategoryIdList(list);
 
-//        ResponseAnswerCategory responseAnswerCategory=new ResponseAnswerCategory();
-//        responseAnswerCategory.setCategoryIdList(list);
-//        App.getRetrofit().create(RetroAPI.class).getAllCategoryQuestion(responseAnswerCategory).enqueue(new Callback<ResponseQuestion>() {
-//            @Override
-//            public void onResponse(Call<ResponseQuestion> call, Response<ResponseQuestion> response) {
-//                ResponseQuestion responseQuestion=response.body();
-//                Toast.makeText(TestActivity.this,responseQuestion.getNumberOfElements(),Toast.LENGTH_LONG).show();
-//
-//
-//
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseQuestion> call, Throwable t) {
-//
-//            }
-//        });
+App.getRetrofit().create(RetroAPI.class).getQuestionsOfSelectedCategories(responseAnswerCategory).enqueue(new Callback<GetAllQuestionsOdCatResponse>() {
+    @Override
+    public void onResponse(Call<GetAllQuestionsOdCatResponse> call, Response<GetAllQuestionsOdCatResponse> response) {
+
+        GetAllQuestionsOdCatResponse getAllQuestions=response.body();
+        Toast.makeText(TestActivity.this,getAllQuestions.getContent().get(1).getQuestionValue(),Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void onFailure(Call<GetAllQuestionsOdCatResponse> call, Throwable t) {
+
+    }
+});
+
 
 
 
