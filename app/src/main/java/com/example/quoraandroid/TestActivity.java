@@ -31,6 +31,27 @@ public class TestActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences=getSharedPreferences("login",MODE_PRIVATE);
         QuestionsDTO questionsDTO=new QuestionsDTO();
 
+
+
+        String token=sharedPreferences.getString("accessToken","");
+
+
+
+        App.getRetrofit().create(RetroAPI.class).getCategory(token).enqueue(new Callback<List<InterestDto>>() {
+            @Override
+            public void onResponse(Call<List<InterestDto>> call, Response<List<InterestDto>> response) {
+
+                
+
+            }
+
+            @Override
+            public void onFailure(Call<List<InterestDto>> call, Throwable t) {
+
+            }
+        });
+
+
 //working (Ask question)
         questionsDTO.setCategoryId("Coding");
         questionsDTO.setQuestionValue("I deserve to be in coviam?");
@@ -40,6 +61,9 @@ public class TestActivity extends AppCompatActivity {
         questionsDTO.setProfileWhereAskedName("Arnav");
         questionsDTO.setProfileWhereAskedId("2");
         questionsDTO.setProfileWhereAskedType("public");
+
+
+
 
 
 //
@@ -59,26 +83,29 @@ public class TestActivity extends AppCompatActivity {
 //            }
 //        });
 
-        List<String> list=new ArrayList<>();
-        list.add("coding");
 
-        ResponseAnswerCategory responseAnswerCategory=new ResponseAnswerCategory();
-        responseAnswerCategory.setCategoryIdList(list);
-        App.getRetrofit().create(RetroAPI.class).getAllCategoryQuestion(responseAnswerCategory).enqueue(new Callback<ResponseQuestion>() {
-            @Override
-            public void onResponse(Call<ResponseQuestion> call, Response<ResponseQuestion> response) {
-                ResponseQuestion responseQuestion=response.body();
-                Toast.makeText(TestActivity.this,responseQuestion.getNumberOfElements(),Toast.LENGTH_LONG);
-
-
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseQuestion> call, Throwable t) {
-
-            }
-        });
+        //not working
+//        List<String> list=new ArrayList<>();
+//        list.add("coding");
+//
+//        ResponseAnswerCategory responseAnswerCategory=new ResponseAnswerCategory();
+//        responseAnswerCategory.setCategoryIdList(list);
+//        App.getRetrofit().create(RetroAPI.class).getAllCategoryQuestion(responseAnswerCategory).enqueue(new Callback<ResponseQuestion>() {
+//            @Override
+//            public void onResponse(Call<ResponseQuestion> call, Response<ResponseQuestion> response) {
+//                ResponseQuestion responseQuestion=response.body();
+//                Toast.makeText(TestActivity.this,responseQuestion.getNumberOfElements(),Toast.LENGTH_LONG);
+//
+//
+//
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseQuestion> call, Throwable t) {
+//
+//            }
+//        });
 
 
 
