@@ -38,7 +38,3 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
     implementation 'androidx.work:work-runtime:2.3.0'
 }
-
-
-
-
