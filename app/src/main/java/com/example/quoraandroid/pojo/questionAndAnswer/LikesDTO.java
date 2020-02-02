@@ -8,6 +8,8 @@ import lombok.Setter;
 @Setter
 public class LikesDTO {
 
-    String profileId;
-    String questionOrAnswerId;
+    private String profileId;
+    private String questionOrAnswerId;
+    private String profileName;
+    private String askerOrAnswererId;
 }
