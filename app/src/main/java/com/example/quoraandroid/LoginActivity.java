@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -49,6 +50,17 @@ public class LoginActivity extends AppCompatActivity {
         mLoginBtn = findViewById(R.id.login_login_btn);
 
 
+        //ProgressBars
+        final ProgressDialog progressBar = new ProgressDialog(this);
+        progressBar.setCancelable(true);
+        progressBar.setMessage("Please Wait...");
+        progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressBar.setProgress(0);
+        progressBar.setMax(100);
+        // progressBar.show();
+
+
+
 //String token=sharedPreferences.getString("accessToken","");
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
@@ -75,10 +87,11 @@ public class LoginActivity extends AppCompatActivity {
 
                                 LoginPost loginPost=new LoginPost(email,password,token,"quora");
 
+                                progressBar.show();
                                 App.getRetrofitRegistration().create(RetroAPI.class).loginUser(loginPost).enqueue(new Callback<ApiResponse<TokenDTO>>() {
                                     @Override
                                     public void onResponse(Call<ApiResponse<TokenDTO>> call, Response<ApiResponse<TokenDTO>> response) {
-
+                                        progressBar.hide();
                                         ApiResponse<TokenDTO> response1=response.body();
                                         SharedPreferences.Editor editor=sharedPreferences.edit();
                                         editor.putString("accessToken",response1.getData().getAccessToken());
@@ -93,14 +106,17 @@ public class LoginActivity extends AppCompatActivity {
                                             startActivity(intent);
                                         }
                                         else{
-                                            Intent intent=new Intent(LoginActivity.this,SearchActivity.class);
+
+                                            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+
                                             startActivity(intent);
                                         }
                                     }
 
                                     @Override
                                     public void onFailure(Call<ApiResponse<TokenDTO>> call, Throwable t) {
-
+                                        Toast.makeText(LoginActivity.this, "login failed", Toast.LENGTH_SHORT).show();
+                                        progressBar.hide();
                                     }
                                 });
 
