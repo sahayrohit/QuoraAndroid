@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp">
+
+    <TextView
+        android:id="@+id/search_name_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile Name"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        />
+    <TextView
+        android:id="@+id/search_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:maxLength="200"
+        android:layout_marginTop="8dp"
+        android:maxLines="8"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:text="What is the most disrespectful thing someone has done while you were shopping?"
+        android:textColor="@color/colorBlack" />
+
+
+</LinearLayout>
