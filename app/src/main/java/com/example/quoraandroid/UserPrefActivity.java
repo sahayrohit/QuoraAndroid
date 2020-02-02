@@ -84,7 +84,7 @@ public class UserPrefActivity extends AppCompatActivity {
                 }
                 if(cartoons.isChecked())
                 {
-                    interests.add(new InterestDto(String.valueOf(cartoons.getId()),cartoons.getText().toString()));
+                    interests.add(new InterestDto(cartoons.getText().toString(),cartoons.getText().toString()));
                 }
                 if(literature.isChecked())
                 {

@@ -158,8 +158,8 @@ Call<List<AdsDTO>> getAllAds(@Path("accessToken") String token);
     @PUT("profile/addCategory")
     Call<String> addCategory(@Body CategoryDto categoryDto);
 
-    @GET("profile/category/{userId}")
-    Call<List<InterestDto>> getCategory(@Path("userId") String userId);
+    @GET("profile/category")
+    Call<List<InterestDto>> getCategory(@Header("token") String token);
 
     @GET("profile/follower/{userId}")
     Call<List<UserDetailDto>> getFollower(@Path("userId") String userId);
