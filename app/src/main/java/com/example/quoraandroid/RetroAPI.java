@@ -22,6 +22,8 @@ import com.example.quoraandroid.pojo.questionAndAnswer.LikesDTO;
 import com.example.quoraandroid.pojo.questionAndAnswer.QuestionsDTO;
 import com.example.quoraandroid.pojo.pagination.ResponsePage;
 import com.example.quoraandroid.pojo.questionAndAnswer.ResponseAnswerCategory;
+import com.example.quoraandroid.pojo.questionAndAnswer.getAllAnsOfQuestionId.AnsOfAQuesIdResponse;
+import com.example.quoraandroid.pojo.questionAndAnswer.getAllQuestionsOfSelectedCategories.GetAllQuestionsOdCatResponse;
 import com.example.quoraandroid.pojo.questionAndAnswer.responseHomePage.ResponseQuestion;
 import com.example.quoraandroid.pojo.questionAndAnswer.SetApprovedAnswerRequestDTO;
 import com.example.quoraandroid.pojo.registration.ApiResponse;
@@ -80,6 +82,8 @@ Call<List<AdsDTO>> getAllAds(@Path("accessToken") String token);      //done
 //Questions and answer micro service
 
 
+    @GET("/answers/getAllAnswersOfAQuestion")
+    Call<AnsOfAQuesIdResponse> getAllAnswerOfQuestion(@Query("questionId")String questionId);
 
  @POST("/answers/addAnswer")
  Call<String> addAnswer(@Header("token")String token,@Header("name") String name,@Body AnswerDTO answersDTO);
@@ -96,7 +100,7 @@ Call<List<AdsDTO>> getAllAds(@Path("accessToken") String token);      //done
     Call<String> addLikes(@Header("token")String token,@Body LikesDTO likesDTO);
 
     @POST("/questions/getQuestionsOfSelectedCategories")
-    Call<ResponseQuestion> getAllCategoryQuestion(@Body ResponseAnswerCategory responseAnswerCategory);
+    Call<GetAllQuestionsOdCatResponse> getQuestionsOfSelectedCategories(@Body ResponseAnswerCategory responseAnswerCategory);
 
     @PUT("/questions/addDislikes")
     Call<String> addDislikes(@Header("token")String token,@Body DislikesDTO dislikesDTO);
