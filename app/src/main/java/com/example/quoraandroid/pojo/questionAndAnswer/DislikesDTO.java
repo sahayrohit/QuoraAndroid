@@ -6,6 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DislikesDTO {
-    String profileId;
-    String questionOrAnswerId;
+    private String profileId;
+    private String questionOrAnswerId;
+    private String profileName;
+    private String askerOrAnswererId;
 }

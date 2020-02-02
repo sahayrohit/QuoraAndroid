@@ -33,7 +33,7 @@ public class App extends Application {
     static Retrofit getRetrofitCategories(){
         if(retrofit5==null){
             OkHttpClient client = new OkHttpClient.Builder().build();
-            retrofit5=new Retrofit.Builder().baseUrl("http://172.16.20.83:8080").addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().create())).client(client).build();
+            retrofit5=new Retrofit.Builder().baseUrl("http://172.16.20.83:8080/").addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().create())).client(client).build();
         }
         return retrofit5;
     }
@@ -51,7 +51,7 @@ public class App extends Application {
     static Retrofit getRetrofitAds(){
         if(retrofit3==null){
             OkHttpClient client = new OkHttpClient.Builder().build();
-            retrofit3=new Retrofit.Builder().baseUrl("http://172.16.20.83:8080").addConverterFactory(GsonConverterFactory.create()).client(client).build();
+            retrofit3=new Retrofit.Builder().baseUrl("http://172.16.20.83:8080/").addConverterFactory(GsonConverterFactory.create()).client(client).build();
         }
         return retrofit3;
     }
@@ -74,7 +74,7 @@ public class App extends Application {
     static Retrofit getRetrofitRegistration(){
         if(retrofit2==null){
             OkHttpClient client = new OkHttpClient.Builder().build();
-            retrofit2=new Retrofit.Builder().baseUrl("http://172.16.20.121:8080").addConverterFactory(GsonConverterFactory.create()).client(client).build();
+            retrofit2=new Retrofit.Builder().baseUrl("http://172.16.20.121:8080/").addConverterFactory(GsonConverterFactory.create()).client(client).build();
         }
         return retrofit2;
     }

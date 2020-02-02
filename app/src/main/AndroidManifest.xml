@@ -13,22 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".TestActivity">
-
-
-        </activity>
-        <activity android:name=".AdsActivity">
+        <activity android:name=".SearchActivity">
 
         </activity>
-        android:theme="@style/AppTheme">
-        <activity android:name=".CommentsActivity"></activity>
+        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".AdsActivity"></activity>
+        <activity android:name=".CommentsActivity" />
         <activity android:name=".UserProfile" />
-
         <activity android:name=".FriendRequestActivity" />
         <activity android:name=".AnswerActivity" />
-        <activity android:name=".UserPrefActivity" >
-
-        </activity>
+        <activity android:name=".UserPrefActivity"></activity>
         <activity android:name=".NotificationActivity" />
         <activity
             android:name=".MyProfileActivity"
@@ -36,16 +30,13 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity">
 
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" >
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
 
 
         <service

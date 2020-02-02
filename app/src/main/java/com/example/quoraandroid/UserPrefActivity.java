@@ -88,11 +88,11 @@ public class UserPrefActivity extends AppCompatActivity {
                 }
                 if(literature.isChecked())
                 {
-                    interests.add( new InterestDto(String.valueOf(literature.getId()),literature.getText().toString()));
+                    interests.add( new InterestDto(literature.getText().toString(),literature.getText().toString()));
                 }
                 if(cricket.isChecked())
                 {
-                    interests.add(new InterestDto(String.valueOf(cricket.getId()),cricket.getText().toString()));
+                    interests.add(new InterestDto(cricket.getText().toString(),cricket.getText().toString()));
                 }
                 if(coding.isChecked())
                 {
