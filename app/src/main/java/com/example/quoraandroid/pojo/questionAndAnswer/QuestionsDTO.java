@@ -14,6 +14,8 @@ public class QuestionsDTO {
     private String questionId;
     private String questionValue;
     private Boolean questionStatus;
+    private String categoryId;
+    private String categoryName;
     private Date date=new Date();
     private String askerProfileId;
     private String askerProfileName;
@@ -30,4 +32,6 @@ public class QuestionsDTO {
     private List<String> answerIdList=new ArrayList<>();
     private String approvedAnswerId;
     private String approvedAnswer;
+    private String approvedAnswererId;
+    private String approvedAnswererProfile;
 }
