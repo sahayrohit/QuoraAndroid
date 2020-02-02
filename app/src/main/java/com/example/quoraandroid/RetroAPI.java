@@ -13,12 +13,14 @@ import com.example.quoraandroid.pojo.Profile.ExtraDetailsDto;
 import com.example.quoraandroid.pojo.Profile.InterestDto;
 import com.example.quoraandroid.pojo.Profile.ProfileDto;
 import com.example.quoraandroid.pojo.Profile.UserDetailDto;
+import com.example.quoraandroid.pojo.RegisterResponse;
 import com.example.quoraandroid.pojo.questionAndAnswer.CategoryDTO;
 import com.example.quoraandroid.pojo.questionAndAnswer.DislikesDTO;
 import com.example.quoraandroid.pojo.questionAndAnswer.EmojisDTO;
 import com.example.quoraandroid.pojo.questionAndAnswer.LikesDTO;
 import com.example.quoraandroid.pojo.questionAndAnswer.QuestionsDTO;
 import com.example.quoraandroid.pojo.pagination.ResponsePage;
+import com.example.quoraandroid.pojo.questionAndAnswer.ResponseAnswerCategory;
 import com.example.quoraandroid.pojo.questionAndAnswer.responseHomePage.ResponseQuestion;
 import com.example.quoraandroid.pojo.questionAndAnswer.SetApprovedAnswerRequestDTO;
 import com.example.quoraandroid.pojo.registration.ApiResponse;
@@ -46,6 +48,10 @@ public interface RetroAPI {
 Call<List<AdsDTO>> getAllAds(@Path("accessToken") String token);
 
 
+ @GET("/ads/tags")
+ Call<List<String>> getAllCategories();
+
+
 
 //login and registration
 
@@ -53,7 +59,7 @@ Call<List<AdsDTO>> getAllAds(@Path("accessToken") String token);
  Call<ApiResponse<SignUp>> getRole(@Body SignUp signUp, @Header("Authorization") String accessToken);
 
  @POST("/controller/register")
- Call<UserRegistrationDTO> registerUser(@Body UserRegistrationDTO userRegistrationDTO);
+ Call<RegisterResponse> registerUser(@Body UserRegistrationDTO userRegistrationDTO);
 
 
  @POST("/controller/login")
@@ -75,11 +81,13 @@ Call<List<AdsDTO>> getAllAds(@Path("accessToken") String token);
 
 
     @POST("/questions/addQuestion")
-    Call<String> addQuestion(@Body QuestionsDTO questionsDTO);
+    Call<String> addQuestion(@Body QuestionsDTO questionsDTO,@Header("token") String token);
 
     @PUT("/questions/addLikes")
     Call<String> addLikes(@Body LikesDTO likesDTO);
 
+    @POST("/questions/getQuestionsOfSelectedCategories")
+    Call<ResponseQuestion> getAllCategoryQuestion(@Body ResponseAnswerCategory responseAnswerCategory);
 
     @PUT("/questions/addDislikes")
     Call<String> addDislikes(@Body DislikesDTO dislikesDTO);
@@ -118,10 +126,10 @@ Call<List<AdsDTO>> getAllAds(@Path("accessToken") String token);
     Call<String> addBasicDetails(@Body UserRegistrationDTO userRegistrationDTO);
 
     @POST("profile/extraDetails")
-    Call<String> addExtraDetails(@Body ExtraDetailsDto extraDetailsDto);
+    Call<String> addExtraDetails(@Body ExtraDetailsDto extraDetailsDto,@Header("token")String token);
 
-    @GET("/profile/{userId}")
-    Call<ProfileDto> getProfile(@Path("userId") String userId);
+    @GET("/profile/profile")
+    Call<ProfileDto> getProfile(@Header("token") String token);
 
     @GET("profile/followerId")
     Call<AskerResponseDto> getFollowerId(@Body AskerDto askerDto);

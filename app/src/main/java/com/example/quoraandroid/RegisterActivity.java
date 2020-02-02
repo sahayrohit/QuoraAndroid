@@ -3,6 +3,7 @@ package com.example.quoraandroid;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.quoraandroid.pojo.RegisterResponse;
 import com.example.quoraandroid.pojo.registration.Interest;
 import com.example.quoraandroid.pojo.registration.UserRegistrationDTO;
 import com.google.android.material.textfield.TextInputEditText;
@@ -28,7 +30,9 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputEditText mEmail;
     private TextInputEditText mPassword;
     private Button mRegBtn;
-
+    UserRegistrationDTO userRegistrationDTO1;
+    private String userId;
+    SharedPreferences sharedPreferences;
 
 //Access specifier
 
@@ -44,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         mPassword = (TextInputEditText) findViewById(R.id.reg_Password);
         mLoginBtn = (TextView) findViewById(R.id.reg_login_txt);
         mRegBtn = (Button) findViewById(R.id.reg_btn);
-
+        sharedPreferences = getSharedPreferences("login",MODE_PRIVATE);
 
 
         mRegBtn.setOnClickListener(new View.OnClickListener() {
@@ -55,28 +59,68 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = mEmail.getText().toString();
                 String password = mPassword.getText().toString();
 
-
-
-                final UserRegistrationDTO userRegistrationDTO=new UserRegistrationDTO(first_name,email,password,null);
-                App.getRetrofitRegistration().create(RetroAPI.class).registerUser(userRegistrationDTO).enqueue(new Callback<UserRegistrationDTO>() {
+                UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO(first_name, email, password, null);
+                App.getRetrofitRegistration().create(RetroAPI.class).registerUser(userRegistrationDTO).enqueue(new Callback<RegisterResponse>() {
                     @Override
-                    public void onResponse(Call<UserRegistrationDTO> call, Response<UserRegistrationDTO> response) {
+                    public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+                        RegisterResponse registerResponse = response.body();
+                        userId = registerResponse.getData().getUserId();
+                        String first_name = response.body().getData().getName();
+                        String email = response.body().getData().getEmailAddress();
+                        String password = response.body().getData().getPassword();
+                        SharedPreferences.Editor editor=sharedPreferences.edit();
+                        editor.putString("userId",userId);
+                        editor.apply();
+                        Log.d("userid","user id:"+ userId);
+                        UserRegistrationDTO userRegistrationDTO2 = new UserRegistrationDTO(first_name, email, password, userId);
+                       App.getRetrofit().create(RetroAPI.class).addBasicDetails(userRegistrationDTO2).enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
 
-                        UserRegistrationDTO userRegistrationDTO1 = response.body();
-                        Toast.makeText(RegisterActivity.this,userRegistrationDTO1.getName(),Toast.LENGTH_LONG).show();
-                      //  Log.d("reg",userRegistrationDTO1.getName());
-                        Log.d("REG", "reg form " + userRegistrationDTO1.getName());
+                                String responseString=response.body();
+                                Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+                                startActivity(intent);
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+
+                                Log.d("fail","failure",t);
+                            }
+                        });
+
+
+
+
 
                     }
 
                     @Override
-                    public void onFailure(Call<UserRegistrationDTO> call, Throwable t) {
-                        Log.d("REG", "failure " + t.getMessage());
-
-
+                    public void onFailure(Call<RegisterResponse> call, Throwable t) {
+                        System.out.println("register api callback error");
                     }
+
                 });
-                 sendToLogin();
+
+
+//                Log.d("id:", "id: " + userRegistrationDTO1.getUserId());
+//                Log.d("id", userRegistrationDTO1.getUserId());
+//                UserRegistrationDTO userRegistrationDTO2 = new UserRegistrationDTO(first_name, email, password, userId);
+//                App.getRetrofitProfile().create(RetroAPI.class).addBasicDetails(userRegistrationDTO2).enqueue(new Callback<String>() {
+//                    @Override
+//                    public void onResponse(Call<String> call, Response<String> response) {
+//
+//                        String responseString = response.body();
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<String> call, Throwable t) {
+//                        Log.d("fail", "failure");
+//                    }
+//                });
+
 
                 // sendToUserPref();
             }
@@ -84,19 +128,21 @@ public class RegisterActivity extends AppCompatActivity {
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            sendToLogin();
+
+
+                sendToLogin();
             }
         });
     }
 
     private void sendToUserPref() {
-        Intent user_pref_intent = new Intent(RegisterActivity.this,UserPrefActivity.class);
+        Intent user_pref_intent = new Intent(RegisterActivity.this, UserPrefActivity.class);
         startActivity(user_pref_intent);
         finish();
     }
 
     private void sendToLogin() {
-        Intent login_intent = new Intent(RegisterActivity.this,LoginActivity.class);
+        Intent login_intent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(login_intent);
         finish();
     }

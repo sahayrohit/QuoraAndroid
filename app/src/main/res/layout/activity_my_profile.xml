@@ -46,12 +46,14 @@
                 android:orientation="vertical"
                 android:layout_gravity="center">
                 <TextView
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ayush Eshan"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp" />
                 <TextView
+                    android:id="@+id/email"
                     android:layout_marginTop="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -71,6 +73,7 @@
                         android:textColor="@color/colorWhite"
                         android:textSize="16sp" />
                     <TextView
+                        android:id="@+id/level"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Advanced"

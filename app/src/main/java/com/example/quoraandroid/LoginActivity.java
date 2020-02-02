@@ -83,11 +83,13 @@ public class LoginActivity extends AppCompatActivity {
                                         SharedPreferences.Editor editor=sharedPreferences.edit();
                                         editor.putString("accessToken",response1.getData().getAccessToken());
                                         editor.apply();
+
                                         Toast.makeText(LoginActivity.this, "response "+ response1.getData().getProfile(), Toast.LENGTH_SHORT).show();
 
                                         if(response1.getData().getProfile().toString().equals("")) {
                                             Intent intent = new Intent(LoginActivity.this, UserPrefActivity.class);
                                             intent.putExtra("token", response1.getData().getAccessToken());
+
                                             startActivity(intent);
                                         }
                                         else{
