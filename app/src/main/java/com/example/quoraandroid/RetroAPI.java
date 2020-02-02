@@ -14,6 +14,7 @@ import com.example.quoraandroid.pojo.Profile.InterestDto;
 import com.example.quoraandroid.pojo.Profile.ProfileDto;
 import com.example.quoraandroid.pojo.Profile.UserDetailDto;
 import com.example.quoraandroid.pojo.RegisterResponse;
+import com.example.quoraandroid.pojo.questionAndAnswer.AnswerDTO;
 import com.example.quoraandroid.pojo.questionAndAnswer.CategoryDTO;
 import com.example.quoraandroid.pojo.questionAndAnswer.DislikesDTO;
 import com.example.quoraandroid.pojo.questionAndAnswer.EmojisDTO;
@@ -28,6 +29,8 @@ import com.example.quoraandroid.pojo.registration.LoginPost;
 import com.example.quoraandroid.pojo.registration.SignUp;
 import com.example.quoraandroid.pojo.registration.TokenDTO;
 import com.example.quoraandroid.pojo.registration.UserRegistrationDTO;
+import com.example.quoraandroid.pojo.search.SearchPaginatedResponse;
+import com.example.quoraandroid.pojo.search.SearchResponse;
 
 import java.util.List;
 
@@ -45,11 +48,11 @@ public interface RetroAPI {
 
 
  @GET("ads/getAds/{accessToken}")
-Call<List<AdsDTO>> getAllAds(@Path("accessToken") String token);
+Call<List<AdsDTO>> getAllAds(@Path("accessToken") String token);      //done
 
 
  @GET("/ads/tags")
- Call<List<String>> getAllCategories();
+ Call<List<String>> getAllCategories();                   //done
 
 
 
@@ -68,7 +71,9 @@ Call<List<AdsDTO>> getAllAds(@Path("accessToken") String token);
     //for categories
 
    @GET("/ads/categories")
-   Call<List<String>> getCategories();
+   Call<List<String>> getCategories();                       //done
+
+
 
 
 
@@ -76,21 +81,25 @@ Call<List<AdsDTO>> getAllAds(@Path("accessToken") String token);
 
 
 
+ @POST("/answers/addAnswer")
+ Call<String> addAnswer(@Header("token")String token,@Header("name") String name,@Body AnswerDTO answersDTO);
+
+
     @GET("/questions/getAllQuestions")
-    Call<ResponseQuestion> homepage(@Query("pageNumber") int page, @Query("pageSize") int pageSize);
+    Call<ResponseQuestion> homepage(@Query("pageNumber") int page, @Query("pageSize") int pageSize);   //done
 
 
     @POST("/questions/addQuestion")
-    Call<String> addQuestion(@Body QuestionsDTO questionsDTO,@Header("token") String token);
+    Call<String> addQuestion(@Body QuestionsDTO questionsDTO,@Header("token") String token);     //done
 
     @PUT("/questions/addLikes")
-    Call<String> addLikes(@Body LikesDTO likesDTO);
+    Call<String> addLikes(@Header("token")String token,@Body LikesDTO likesDTO);
 
     @POST("/questions/getQuestionsOfSelectedCategories")
     Call<ResponseQuestion> getAllCategoryQuestion(@Body ResponseAnswerCategory responseAnswerCategory);
 
     @PUT("/questions/addDislikes")
-    Call<String> addDislikes(@Body DislikesDTO dislikesDTO);
+    Call<String> addDislikes(@Header("token")String token,@Body DislikesDTO dislikesDTO);
 
     @PUT("/questions/addEmojis")
     Call<String> addEmojis(EmojisDTO emojisDTO);
@@ -123,13 +132,13 @@ Call<List<AdsDTO>> getAllAds(@Path("accessToken") String token);
 
 
     @POST("profile/basicDetails")
-    Call<String> addBasicDetails(@Body UserRegistrationDTO userRegistrationDTO);
+    Call<String> addBasicDetails(@Body UserRegistrationDTO userRegistrationDTO);       //done
 
     @POST("profile/extraDetails")
-    Call<String> addExtraDetails(@Body ExtraDetailsDto extraDetailsDto,@Header("token")String token);
+    Call<String> addExtraDetails(@Body ExtraDetailsDto extraDetailsDto,@Header("token")String token);  //done
 
     @GET("/profile/profile")
-    Call<ProfileDto> getProfile(@Header("token") String token);
+    Call<ProfileDto> getProfile(@Header("token") String token);           //done
 
     @GET("profile/followerId")
     Call<AskerResponseDto> getFollowerId(@Body AskerDto askerDto);
@@ -159,7 +168,7 @@ Call<List<AdsDTO>> getAllAds(@Path("accessToken") String token);
     Call<String> addCategory(@Body CategoryDto categoryDto);
 
     @GET("profile/category")
-    Call<List<InterestDto>> getCategory(@Header("token") String token);
+    Call<List<InterestDto>> getCategory(@Header("token") String token);          //done
 
     @GET("profile/follower/{userId}")
     Call<List<UserDetailDto>> getFollower(@Path("userId") String userId);
@@ -184,7 +193,10 @@ Call<List<AdsDTO>> getAllAds(@Path("accessToken") String token);
 
 
 
+//search
 
+ @GET("search/searchFunction")
+  Call<SearchPaginatedResponse> getSearch(@Query("keyword")String keyword);
 
 
 
