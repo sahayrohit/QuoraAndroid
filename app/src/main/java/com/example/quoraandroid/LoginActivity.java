@@ -106,13 +106,14 @@ public class LoginActivity extends AppCompatActivity {
                                             startActivity(intent);
                                         }
                                         else{
-                                            Intent intent=new Intent(LoginActivity.this,TestActivity.class);
+                                            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                                             startActivity(intent);
                                         }
                                     }
 
                                     @Override
                                     public void onFailure(Call<ApiResponse<TokenDTO>> call, Throwable t) {
+                                        Toast.makeText(LoginActivity.this, "login failed", Toast.LENGTH_SHORT).show();
                                         progressBar.hide();
                                     }
                                 });

@@ -21,7 +21,7 @@ public class MyProfileActivity extends AppCompatActivity {
     private androidx.appcompat.widget.Toolbar toolbar;
 
     private RecyclerView recyclerView;
-    TextView name,email;
+    TextView name,email,role;
 
 
     @Override
@@ -30,6 +30,7 @@ public class MyProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_profile);
         name=findViewById(R.id.name);
         email=findViewById(R.id.email);
+        role = findViewById(R.id.level);
         SharedPreferences sharedPreferences=getSharedPreferences("login",MODE_PRIVATE);
         String token=sharedPreferences.getString("accessToken","");
 
@@ -41,6 +42,8 @@ public class MyProfileActivity extends AppCompatActivity {
                 ProfileDto profileDto=response.body();
                 name.setText(profileDto.getName());
                 email.setText(profileDto.getEmailAddress());
+                role.setText(profileDto.getRole());
+
             }
 
             @Override
