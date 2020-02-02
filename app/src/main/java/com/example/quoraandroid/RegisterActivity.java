@@ -2,6 +2,7 @@ package com.example.quoraandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -51,6 +52,20 @@ public class RegisterActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("login",MODE_PRIVATE);
 
 
+
+        //ProgressBars
+        final ProgressDialog progressBar = new ProgressDialog(this);
+        progressBar.setCancelable(true);
+        progressBar.setMessage("Please Wait...");
+        progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressBar.setProgress(0);
+        progressBar.setMax(100);
+        // progressBar.show();
+
+
+
+
+
         mRegBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,9 +75,11 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = mPassword.getText().toString();
 
                 UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO(first_name, email, password, null);
+                progressBar.show();
                 App.getRetrofitRegistration().create(RetroAPI.class).registerUser(userRegistrationDTO).enqueue(new Callback<RegisterResponse>() {
                     @Override
                     public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+                        progressBar.hide();
                         RegisterResponse registerResponse = response.body();
                         userId = registerResponse.getData().getUserId();
                         String first_name = response.body().getData().getName();
@@ -73,10 +90,12 @@ public class RegisterActivity extends AppCompatActivity {
                         editor.apply();
                         Log.d("userid","user id:"+ userId);
                         UserRegistrationDTO userRegistrationDTO2 = new UserRegistrationDTO(first_name, email, password, userId);
+                        progressBar.show();
                        App.getRetrofit().create(RetroAPI.class).addBasicDetails(userRegistrationDTO2).enqueue(new Callback<String>() {
                             @Override
                             public void onResponse(Call<String> call, Response<String> response) {
 
+                                progressBar.hide();
                                 String responseString=response.body();
                                 Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
                                 startActivity(intent);
@@ -85,6 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<String> call, Throwable t) {
+                                progressBar.hide();
 
                                 Log.d("fail","failure",t);
                             }

@@ -1,6 +1,9 @@
 package com.example.quoraandroid;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     PostAdapter postAdapter;
     int position;
     RecyclerView recyclerView;
+    SharedPreferences sharedPreferences;
+    public static final String myPreference = "login";
 
     List<ContentItem> list=new ArrayList<>();
 
@@ -53,6 +58,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
 
+        //ProgressBars
+        final ProgressDialog progressBar = new ProgressDialog(this);
+        progressBar.setCancelable(true);
+        progressBar.setMessage("Please Wait...");
+        progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressBar.setProgress(0);
+        progressBar.setMax(100);
+        // progressBar.show();
 
 
 
@@ -60,10 +73,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
+
+
+            progressBar.show();
         App.getRetrofit().create(RetroAPI.class).homepage(page,3).enqueue(new Callback<ResponseQuestion>() {
             @Override
             public void onResponse(Call<ResponseQuestion> call, Response<ResponseQuestion> response) {
-
+            progressBar.hide();
                 ResponseQuestion responseQuestion=response.body();
                 list=responseQuestion.getContent();
                 Toast.makeText(MainActivity.this,list.get(0).getQuestionValue(),Toast.LENGTH_LONG).show();
@@ -96,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onFailure(Call<ResponseQuestion> call, Throwable t) {
-
+                progressBar.hide();
                 Log.d("Fail","failure");
             }
         });
@@ -242,6 +258,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        sharedPreferences = getSharedPreferences(myPreference, Context.MODE_PRIVATE);
+        String account = sharedPreferences.getString("accessToken", null);
+        //SharedPreferences sharedPreferences=getSharedPreferences("login",MODE_PRIVATE);
+        //String token=sharedPreferences.getString("accessToken","");
+        updateUI(account);
+    }
+
+    private void updateUI(String account) {
+
+        if(account!=null){
+
+
+        }
+
+    }
 
 
 
