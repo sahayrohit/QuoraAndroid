@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -22,7 +23,8 @@ public class MyProfileActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     TextView name,email,role;
-
+    public static final String myPreference = "login";
+    //SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +33,12 @@ public class MyProfileActivity extends AppCompatActivity {
         name=findViewById(R.id.name);
         email=findViewById(R.id.email);
         role = findViewById(R.id.level);
-        SharedPreferences sharedPreferences=getSharedPreferences("login",MODE_PRIVATE);
-        String token=sharedPreferences.getString("accessToken","");
 
 
-        App.getRetrofit().create(RetroAPI.class).getProfile(token).enqueue(new Callback<ProfileDto>() {
+       SharedPreferences sharedPreferences = getSharedPreferences(myPreference, Context.MODE_PRIVATE);
+        String account = sharedPreferences.getString("accessToken", null);
+
+        App.getRetrofit().create(RetroAPI.class).getProfile(account).enqueue(new Callback<ProfileDto>() {
             @Override
             public void onResponse(Call<ProfileDto> call, Response<ProfileDto> response) {
 
@@ -53,10 +56,33 @@ public class MyProfileActivity extends AppCompatActivity {
         });
 
         //toolbar
-        toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.profile_toolbar);
+        toolbar = findViewById(R.id.profile_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+
+
+
+        //        App.getRetrofit().create(RetroAPI.class).getCategory(token).enqueue(new Callback<List<InterestDto>>() {
+//            @Override
+//            public void onResponse(Call<List<InterestDto>> call, Response<List<InterestDto>> response) {
+//
+//                List<InterestDto> interestDto=response.body();
+//                Toast.makeText(TestActivity.this,interestDto.get(0).getInterestName(),Toast.LENGTH_LONG).show();
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<InterestDto>> call, Throwable t) {
+//
+//                Log.d("Fail","failure");
+//            }
+//        });
+
+
+
 
         //RecyclerView for category
         recyclerView = findViewById(R.id.profile_category_recycler);
