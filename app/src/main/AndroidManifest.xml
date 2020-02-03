@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PerticularQuestionActivity"></activity>
+        <activity android:name=".AnswerForQuestionActivity"></activity>
+        <activity android:name=".PerticularQuestionActivity" />
         <activity android:name=".AddQuestionActivity" />
         <activity android:name=".TestActivity" />
         <activity android:name=".AdsActivity" />

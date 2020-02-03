@@ -268,7 +268,7 @@ mSearchBtn.setOnClickListener(new View.OnClickListener() {
         sharedPreferences = getSharedPreferences(myPreference, Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString("accessToken","null");
+        editor.putString("accessToken",null);
         editor.commit();
         updateUI(null);
     }

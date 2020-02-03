@@ -39,7 +39,7 @@ PostClick postClick;
 
         holder.mName.setText(itemList.get(position).getAskerProfileName());
         holder.mQuestion.setText(itemList.get(position).getQuestionValue());
-        holder.mAnswer.setText(itemList.get(position).getApprovedAnswerId());
+        holder.mAnswer.setText(itemList.get(position).getApprovedAnswer().toString());
 
 
         holder.itemView.getRootView().setOnClickListener(new View.OnClickListener() {
